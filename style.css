@@ -1,20 +1,23 @@
-/* Center container */
-body, html {
-  height: 100%;
+/* Reset */
+* {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f0f4f8;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  padding: 0;
+  box-sizing: border-box;
 }
 
+html, body {
+  height: 100%;
+  font-family: Arial, sans-serif;
+  background: #f0f4f8;
+}
+
+/* Center everything */
 .login-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
 }
 
 .login-card {
@@ -27,15 +30,17 @@ body, html {
 }
 
 .login-card h2 {
-  margin-bottom: 20px;
+  margin-bottom: 30px; /* slightly bigger spacing for button */
   color: #1d3557;
 }
 
+/* Buttons centered under title */
 #loginBtn, #logoutBtn {
+  display: block; /* ensures they are centered as block elements */
+  margin: 0 auto 10px auto; /* auto horizontal margin, 10px bottom */
   background-color: #457b9d;
   color: #fff;
   padding: 12px 20px;
-  margin: 10px 0;
   border-radius: 8px;
   border: none;
   cursor: pointer;
@@ -45,4 +50,50 @@ body, html {
 
 #loginBtn:hover, #logoutBtn:hover {
   transform: scale(1.05);
+}
+/* NAV BAR */
+.navbar {
+  width: 100%;
+  background-color: rgba(168, 218, 220, 0.85); /* pastel color with 85% opacity */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  padding: 10px 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  border-radius: 0 0 16px 16px;
+  backdrop-filter: blur(5px); /* optional: nice frosted glass effect */
+}
+
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.nav-logo {
+  font-weight: bold;
+  font-size: 20px;
+  color: #1d3557;
+  text-decoration: none;
+}
+
+.nav-links a {
+  margin-left: 20px;
+  text-decoration: none;
+  color: #1d3557;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover {
+  color: #457b9d;
+}
+
+/* Adjust login card position for navbar */
+.login-container {
+  padding-top: 60px; /* approximate navbar height */
 }

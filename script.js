@@ -15,21 +15,31 @@ function typeWriter(text, elementId, speed = 50) {
 // Trigger typing when user clicks
 function showText(type) {
   if (type === "site") {
-    typeWriter("MindNet is a calm space to write, reflect, and connect with an AI assistant that listens.", "siteText");
+    typeWriter("MindNet is a calm space to write, reflect, gain valuable feedback, and connect with an AI assistant that listens.", "siteText");
   } else if (type === "creator") {
-    typeWriter("Hi, I'm Harshu, the creator of MindNet. I built this to help people process thoughts and emotions safely.", "creatorText");
+    typeWriter("Hi, I'm Harshini, the creator of MindNet. This site was built to help people process thoughts and emotions safely in this overwhelming world.", "creatorText");
   }
 }
 
-// Fade/appear on scroll
+// Fade/appear on scroll (run only once)
+let scrollTextPlayed = false;
+
 document.addEventListener("scroll", () => {
+  if (scrollTextPlayed) return; // stop if already played
+
   const scrollText = document.getElementById("scrollText");
   const triggerPoint = window.innerHeight / 1.3;
   const sectionTop = scrollText.getBoundingClientRect().top;
+
   if (sectionTop < triggerPoint) {
-    typeWriter("Here's where you’ll learn more as you scroll...", "scrollText");
+    typeWriter(
+      "Try out the journal and gain valuable feedback based on entries to improve your daily life! Talk to mindbot to unload some of the stress you're holding or just for fun!",
+      "scrollText"
+    );
+    scrollTextPlayed = true; // lock it so it doesn’t glitch
   }
 });
+
 // Fade in page content on load
 window.addEventListener('DOMContentLoaded', () => {
   const content = document.querySelector('.page-content');
@@ -45,6 +55,6 @@ document.querySelectorAll('.nav-links a').forEach(link => {
     if (content) content.style.opacity = 0; // fade out
     setTimeout(() => {
       window.location = href;
-    }, 400); // match the CSS transition duration
+    }, 400); 
   });
 });

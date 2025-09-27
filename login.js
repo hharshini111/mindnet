@@ -3,7 +3,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebas
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged }
   from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
 
-// Config (yours from Firebase Console)
+// firebase console config
 const firebaseConfig = {
   apiKey: "AIzaSyAJKaBhML-9fJVrdfECgLs_txj-8cQuOYY",
   authDomain: "mindnet-167eb.firebaseapp.com",
@@ -48,7 +48,7 @@ onAuthStateChanged(auth, (user) => {
   if (user) {
     loginBtn.style.display = "none";
     logoutBtn.style.display = "block";
-    userDiv.textContent = `Hello, ${user.displayName}`;
+    userDiv.textContent = `Hello, ${user.displayName}, welcome to MindNet`;
   } else {
     loginBtn.style.display = "block";
     logoutBtn.style.display = "none";

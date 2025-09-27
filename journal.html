@@ -11,5 +11,58 @@
       <a href="chat.html">AI Chat</a>
       <a href="login.html">Login</a>
     </div>
+    
   </div>
+  
 </nav>
+<div class="page-content">
+    <!-- Journal Header -->
+<section class="journal-header">
+      <p id="loginNotice" class="typed-subtext"></p>
+      <h1>Welcome to Your Journal</h1>
+      <p class="journal-intro">
+        This is your space to pause, reflect, and put your thoughts into words.
+        Writing helps to process events, and with MindNet, you can also receive  
+        calm, thoughtful feedback to guide the growth and development of life.
+      </p>
+    </section>
+<!--Journal Form-->
+<section class="journal-entry">
+  <textarea id="entryInput" placeholder="Start writing your thoughts here..."></textarea>
+  <button id="saveEntryBtn">Add Entry</button>
+</section>
+<!--Entries List-->
+<section class="entries-list">
+  <h2>Your Entries</h2>
+  <ul id="entries"></ul>
+</section>
+</div>
+
+<script>
+    // softly type login notice
+    window.addEventListener("DOMContentLoaded", () => {
+      typeWriter(
+        "💡 Log in to save your entries securely and receive personalized AI feedback.",
+        "loginNotice",
+        45
+      );
+    });
+
+    // journal demo: save entries locally unless logged in
+    const saveBtn = document.getElementById("saveEntryBtn");
+    const input = document.getElementById("entryInput");
+    const list = document.getElementById("entries");
+
+    saveBtn.addEventListener("click", () => {
+      const text = input.value.trim();
+      if (!text) return;
+      const li = document.createElement("li");
+      li.textContent = text;
+      list.prepend(li);
+      input.value = "";
+
+      // TODO: if logged in, push to Firebase instead of a local list
+    });
+  </script>
+</body>
+</html>

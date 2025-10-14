@@ -12,36 +12,40 @@
     </div>
   </div>
 </nav>
+<div class="page-content"></div>
+  <!-- HOME SECTION 1 -->
+  <section class="split-section" id="intro">
+    <div class="split-left" onclick="showText('site')">
+      <h2>About the Site</h2>
+      <p id="siteText"></p>
+    </div>
+    <div class="split-right" onclick="showText('creator')">
+      <h2>About the Creator</h2>
+      <p id="creatorText"></p>
+    </div>
+  </section>
 
-  <div class="page-content">
-    <!-- About Section -->
-    <section class="about-section">
-      <h1>About MindNet</h1>
-      <p id="aboutText" class="typed-subtext"></p>
-      <div class="about-cards">
-        <div class="card" onclick="showAbout('mission')">
-          <h2>Our Mission</h2>
-        </div>
-        <div class="card" onclick="showAbout('creator')">
-          <h2>The Creator</h2>
-        </div>
-      </div>
-      <p id="aboutDetails" class="typed-subtext"></p>
-    </section>
-  </div>
+  <!-- HOME SECTION 2 (scroll down for more info) -->
+  <section class="info-section" id="moreInfo">
+    <h2 id="scrollText">Scroll down to discover more...</h2>
+  </section>
+
+  <script src="script.js"></script>
+
+ 
 
   <script src="script.js"></script>
   <script>
     function showAbout(type) {
       if (type === "mission") {
-        typeWriter("Our mission is to create a safe, reflective space for people to express thoughts, gain insight, and find calm in a busy world.", "aboutDetails", 40);
+        typeWriter("The mission is to provide the oppurtunity for people to have access to easy journaling and feedback, gain insight on their entries, and find calm in a busy world.", "aboutDetails", 40);
       } else if (type === "creator") {
-        typeWriter("Harshini, the mind behind MindNet, is dedicated to merging technology with empathy, aiming to create a meaningful mental wellness experience.", "aboutDetails", 40);
+        typeWriter("Harshini, the creator of MindNet, is dedicated to merging technology with empathy, aiming to create a meaningful mental wellness experience especially in the growing cases of depression among teens.", "aboutDetails", 40);
       }
     }
 
     window.addEventListener("DOMContentLoaded", () => {
-      typeWriter("Welcome to the About Page. Learn more about the vision behind MindNet.", "aboutText", 50);
+      typeWriter("Welcome to the About Page. Learn more about how this came to be", "aboutText", 50);
     });
   </script>
 </body>

@@ -1,31 +1,35 @@
 <!-- NAV BAR -->
 <nav class="navbar">
-      <link rel="stylesheet" href="style.css">
+      <link rel="stylesheet" href="style.css" href="about.css">
 
   <div class="nav-container">
     <a href="index.html" class="nav-logo">MindNet</a>
     <div class="nav-links">
       <a href="index.html">Home</a>
-      <a href="about.html">About</a>
       <a href="journal.html">Journal</a>
+      <a href="about.html">About</a>
       <a href="login.html">Login</a>
     </div>
   </div>
-</nav>
+</nav> 
 <div class="page-content"></div>
   <!-- HOME SECTION 1 -->
-  <section class="split-section" id="intro">
+  <section class="split-section" id="intro">  
     <div class="split-left" onclick="showText('site')">
-      <h2>About the Site</h2>
+      <h2>About the Site</h2>  
       <p id="siteText"></p>
     </div>
     <div class="split-right" onclick="showText('creator')">
-      <h2>About the Creator</h2>
+      <h2>-</h2>
       <p id="creatorText"></p>
     </div>
   </section>
-
+<!--
+  The issue: Slow degradation of the use of useful mental health practices due to inneficiency and concern in safety
+  Ideas: To build an easily accessable public website aimed for the mental health of teens due to the increasing stress levels in teens and their busy schedules
+  Features needed: a place to store ideas/information regarding users preference, ai analysis of this information and output feedback for daily life improval, Chatbot/assistance to help guide users through their journaling journey/provide promps and answer questions(personallized bot), a page to describe purpose of site+how it came to be, -->
   <!-- HOME SECTION 2 (scroll down for more info) -->
+
   <section class="info-section" id="moreInfo">
     <h2 id="scrollText">Scroll down to discover more...</h2>
   </section>
@@ -33,17 +37,17 @@
   <script src="script.js"></script>
 
  
-
+ 
   <script src="script.js"></script>
   <script>
     function showAbout(type) {
-      if (type === "mission") {
+    /*  if (type === "mission") {
         typeWriter("The mission is to provide the oppurtunity for people to have access to easy journaling and feedback, gain insight on their entries, and find calm in a busy world.", "aboutDetails", 40);
       } else if (type === "creator") {
-        typeWriter("Harshini, the creator of MindNet, is dedicated to merging technology with empathy, aiming to create a meaningful mental wellness experience especially in the growing cases of depression among teens.", "aboutDetails", 40);
+        typeWriter("Dedicated to merging technology with empathy, this site was made aiming to create a meaningful mental wellness experience especially in the growing cases of depression among teens.", "aboutDetails", 40);
       }
     }
-
+*/
     window.addEventListener("DOMContentLoaded", () => {
       typeWriter("Welcome to the About Page. Learn more about how this came to be", "aboutText", 50);
     });

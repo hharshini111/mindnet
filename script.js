@@ -1,3 +1,5 @@
+//any js related to notecards, entries etc
+//text speed(make faster but softer?)
 function typeWriter(text, elementId, speed = 50) {
   let i = 0;
   const el = document.getElementById(elementId);
@@ -17,7 +19,7 @@ function showText(type) {
   if (type === "site") {
     typeWriter("MindNet is a calm space to write, reflect, gain valuable feedback, and connect with an AI assistant that listens.", "siteText");
   } else if (type === "creator") {
-    typeWriter("Hi, I'm Harshini, the creator of MindNet. This site was built to help people process thoughts and emotions safely in this overwhelming world.", "creatorText");
+ //   typeWriter("Hi, I'm Harshini, the creator of MindNet. This site was built to help people process thoughts and emotions safely in this overwhelming world.", "creatorText");
   }
 }
 
@@ -76,6 +78,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     renderNotes();
     updateEmptyState();
+    if (!title || !content) {
+    alert("Please fill in all fields");
+    return;
+    }
 
     addNoteBtn.addEventListener("click", openAddNoteModal);
     closeModalBtn.addEventListener("click", closeAddNoteModal);

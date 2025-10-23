@@ -19,13 +19,13 @@
       <div class="nav-links">
         <a href="index.html">Home</a>
         <a href="journal.html">Journal</a>
-        <a href="about.html">About</a>
-        <a href="login.html">Login</a>
+        <!--<a href="about.html">About</a>-->
+       <!-- <a href="login.html">Login</a>-->
         <span id="authButton"></span>
       </div>
     </div>
   </nav>
-
+ navbar vol
   <div class="page-content">
     <!-- Journal Header -->
     <section class="journal-header">
@@ -33,14 +33,14 @@
       <h1>Welcome to Your Journal</h1>
       <p class="journal-intro">
         This is your space to pause, reflect, and put your thoughts into words.  
-        Writing helps you process the day, and with MindNet, you can also receive  
-        calm, thoughtful feedback to guide your growth.
+        Writing helps you process the day, and with MindNet, you can also as questions and feedback 
+        to the chatbot on the bottom right.
       </p>
     </section>
 
    
   <script>
-    // softly type login notice
+    /* softly type login notice
     window.addEventListener("DOMContentLoaded", () => {
       typeWriter(
         "💡Log in to save entries and recieve personalized feedback on them.",
@@ -48,6 +48,7 @@
         45
       );
     });
+    */
       // TODO: if logged in, push entries to Firebase instead of local list?
   </script>
   
@@ -147,7 +148,7 @@
                     type="radio"
                     name="noteTag"
                     class="tag-radio"
-                    checked
+                    checked 
                   />
                  
                   </span>
@@ -190,5 +191,25 @@
     </div>
 
     <script src="./index.js"></script>
+
+
+
+
+    <!--Prompt generator-->
+    <!-- 🎡 Spin Wheel Button -->
+<button id="wheelBtn" class="wheel-btn">🎡</button>
+
+<!-- Wheel Modal -->
+<div id="wheelModal" class="wheel-modal">
+
+  <div class="wheel-overlay"></div>
+  <div class="wheel-container">
+    <div class="wheel" id="wheel"></div>
+    <button id="spinBtn" class="spin-btn">SPIN</button>
+    <p id="promptText" class="prompt-text"></p>
+    <button id="closeWheel" class="close-wheel">✖</button>
+  </div>
+</div>
+
   </body>
 </html>

@@ -48,7 +48,7 @@ window.addEventListener('DOMContentLoaded', () => {
   if (content) content.classList.add('show');
 });
 
-// Fade out content before navigating to another page
+// Fade out content before other page
 document.querySelectorAll('.nav-links a').forEach(link => {
   link.addEventListener('click', e => {
     e.preventDefault();
@@ -259,4 +259,54 @@ document.addEventListener("DOMContentLoaded", function () {
             emptyState.style.display = "none";
         }
     }
+});
+/* Prompt generator*/
+const wheelBtn = document.getElementById("wheelBtn");
+const wheelModal = document.getElementById("wheelModal");
+const closeWheel = document.getElementById("closeWheel");
+const wheel = document.getElementById("wheel");
+const spinBtn = document.getElementById("spinBtn");
+const promptText = document.getElementById("promptText");
+
+const prompts = [
+    
+  "What’s one thing you’re grateful for today?",
+  "Describe a small moment that surprised you recently and what you learnt or felt in that moment.",
+  "What’s been weighing on your mind this week?",
+  "How would you explain your defenition of love to somebody else?",
+  "What do you wish you could tell your younger self?",
+  "What’s a goal you want to work on this month?",
+  "Write about someone who inspires you and why.",
+  "What emotion have you felt the most lately and why do you think that is?",
+  "What helps you recharge when you’re tired and how often do you do it?",
+  "If today had a theme or color what would it be?"
+];
+
+let spinning = false; 
+    
+// open modal
+wheelBtn.addEventListener("click", () => {
+  wheelModal.style.display = "block";
+});
+
+// close modal
+closeWheel.addEventListener("click", () => {
+  wheelModal.style.display = "none";
+  wheel.style.transform = "rotate(0deg)";
+  promptText.textContent = "";
+});
+
+// spin logic
+spinBtn.addEventListener("click", () => {
+  if (spinning) return;
+  spinning = true;
+
+  const deg = 720 + Math.floor(Math.random() * 360); // 2 full turns + random stop
+  wheel.style.transform = `rotate(${deg}deg)`;
+
+  setTimeout(() => {
+    const randomPrompt = prompts[Math.floor(Math.random() * prompts.length)];
+    promptText.textContent = `"${randomPrompt}"`;
+    spinning = false;
+  }, 4000); // match CSS transition time
 });

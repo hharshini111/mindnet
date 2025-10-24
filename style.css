@@ -1078,3 +1078,9 @@ body {
 .menu-active .menu-overlay,
 .wheel-modal.active .wheel-overlay {
     pointer-events: auto;
+}
+.icon-note{
+  font-size:0.8rem;
+  color:#333;
+  text-align: center;
+}

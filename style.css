@@ -417,7 +417,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 1000;
+    z-index: 1110;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s, visibility 0.3s;
@@ -425,6 +425,7 @@ body {
 .modal-overlay.active {
     opacity: 1;
     visibility: visible;
+    pointer-events: auto;
 }
 
 .modal {
@@ -436,6 +437,7 @@ body {
     margin: 20px;
     transform: translateY(20px);
     transition: transform 0.3s;
+    z-index: 1110;
 }
 
 .modal-overlay.active .modal {
@@ -452,9 +454,9 @@ body {
     font-size: 1.25rem;
     font-weight: 600;
 }
-.modal-close {
+.modal-close { 
     background: none;
-    border: none;
+    border: none; 
     font-size: 1.25rem;
     color: #999;
     cursor: pointer;
@@ -526,7 +528,7 @@ body {
 
 
 
-
+   
 
 
 
@@ -618,6 +620,7 @@ body {
     font-weight: 500;
     cursor: pointer;
     transition: all 0.3s;
+    z-index: 1110;
 }
 
 .confirm-btn {
@@ -664,7 +667,7 @@ body {
   padding: 10px;
   box-sizing: border-box;
 }
-
+ 
 /*About page*/
 /*main section*/
 .about-section{
@@ -751,46 +754,6 @@ body {
   background-color: #f0f4f8;
   color: #1d3557;
   line-height: 1.6;
-}
-
-/* ===== NAVBAR ===== */
-.navbar {
-  width: 100%;
-  background-color: rgba(168, 218, 220, 0.9);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  padding: 10px 20px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 100;
-  border-radius: 0 0 16px 16px;
-}
-
-.nav-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-.nav-logo {
-  font-weight: bold;
-  font-size: 22px;
-  color: #1d3557;
-  text-decoration: none;
-}
-
-.nav-links a {
-  margin-left: 20px;
-  text-decoration: none;
-  color: #1d3557;
-  font-weight: 500;
-  transition: color 0.2s;
-}
-
-.nav-links a:hover {
-  color: #457b9d;
 }
 
 /*hero(first thing on home page*/
@@ -1042,3 +1005,76 @@ body {
   margin-top: 15px;
   font-style: italic;
 }
+
+
+/*circle menu, only for the biggest circle on the bottom right*/
+.spinning-menu{
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  z-index: 1000;
+}
+/*making background dimmer*/
+.menu-overlay{
+  position: fixed;
+  inset:0;
+  background-color: #588ab3;
+  opacity: 0;
+  visibility:hidden;
+  transition:0.4s;
+
+}
+/*indivividual sub menu's chatbot, generator, quote*/
+.menu-buttons{
+  position: absolute;
+  bottom:70px;
+  display:flex;
+  gap:15px;
+  opacity:0;
+  transform:translateY(20px);transition:0.4s;
+}
+.menu-btn{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items:center;
+  justify-content: center;
+  cursor: pointer;
+  
+}
+
+/*spin login*/
+.main-circle{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items:center;
+  justify-content: center;
+  cursor: pointer;
+  background-color: #4338ca;
+  color:#10b981;
+  animation:spin 10s linear infinite;
+
+  
+}
+@keyframes spin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+.menu-active .menu-buttons{
+  opacity: 1;
+  transform: translateY(0);
+}
+.menu-active .menu-overlay{
+  opacity:1;
+  visibility: visible;
+}
+/* Fix overlays so inactive ones don’t block clicks */
+.menu-overlay,
+.wheel-overlay {
+    pointer-events: none; /* don't block clicks when hidden */
+}
+
+/* Enable only when active */
+.menu-active .menu-overlay,
+.wheel-modal.active .wheel-overlay {
+    pointer-events: auto;

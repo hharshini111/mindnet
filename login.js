@@ -1,4 +1,5 @@
-// only js for logging in
+
+/*// only js for logging in
 // Firebase imports
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged }
@@ -42,7 +43,7 @@ logoutBtn.addEventListener("click", async () => {
   } catch (error) {
     console.error(error);
   }
-});
+});                
 
 // Track login state
 onAuthStateChanged(auth, (user) => {
@@ -56,3 +57,5 @@ onAuthStateChanged(auth, (user) => {
     userDiv.textContent = "";
   }
 });
+/
+*/

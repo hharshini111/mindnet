@@ -1,66 +1,65 @@
-//any js related to notecards, entries etc
-//text speed(make faster but softer?)
-function typeWriter(text, elementId, speed = 50) {
-  let i = 0;
-  const el = document.getElementById(elementId);
-  el.innerHTML = ""; // clear old text
-  function typing() {
-    if (i < text.length) {
-      el.innerHTML += text.charAt(i);
-      i++;
-      setTimeout(typing, speed);
+// --- Typewriter ---
+function typeWriter(text, elementId, speed = 30) { // faster but smoother
+    let i = 0;
+    const el = document.getElementById(elementId);
+    el.innerHTML = "";
+    function typing() {
+        if (i < text.length) {
+            el.innerHTML += text.charAt(i);
+            i++;
+            requestAnimationFrame(typing); // smoother than setTimeout
+        }
     }
-  }
-  typing();
+    typing();
 }
 
-// Trigger typing when user clicks
 function showText(type) {
-  if (type === "site") {
-    typeWriter("MindNet is a calm space to write, reflect, gain valuable feedback, and connect with an AI assistant that listens.", "siteText");
-  } else if (type === "creator") {
- //   typeWriter("Hi, I'm Harshini, the creator of MindNet. This site was built to help people process thoughts and emotions safely in this overwhelming world.", "creatorText");
-  }
+    if (type === "site") {
+        typeWriter(
+            "MindNet is a calm space to write, reflect, gain valuable feedback, and connect with an AI assistant that listens.",
+            "siteText"
+        );
+    } else if (type === "creator") {
+        // Add creator text here if needed
+    }
 }
 
-// Fade/appear on scroll (run only once)
+// --- Scroll-triggered text ---
 let scrollTextPlayed = false;
-
 document.addEventListener("scroll", () => {
-  if (scrollTextPlayed) return; // stop if already played
+    if (scrollTextPlayed) return;
 
-  const scrollText = document.getElementById("scrollText");
-  const triggerPoint = window.innerHeight / 1.3;
-  const sectionTop = scrollText.getBoundingClientRect().top;
+    const scrollText = document.getElementById("scrollText");
+    const triggerPoint = window.innerHeight / 1.3;
+    const sectionTop = scrollText.getBoundingClientRect().top;
 
-  if (sectionTop < triggerPoint) {
-    typeWriter(
-      "Try out the journal and gain valuable feedback based on entries to improve your daily life! Talk to mindbot to unload some of the stress you're holding or just for fun!",
-      "scrollText"
-    );
-    scrollTextPlayed = true; // lock it so it doesn’t glitch
-  }
+    if (sectionTop < triggerPoint) {
+        typeWriter(
+            "Try out the journal and gain valuable feedback based on entries to improve your daily life! Talk to mindbot to unload some of the stress you're holding or just for fun!",
+            "scrollText"
+        );
+        scrollTextPlayed = true;
+    }
 });
 
-// Fade in page content on load
+// --- Page fade in/out ---
 window.addEventListener('DOMContentLoaded', () => {
-  const content = document.querySelector('.page-content');
-  if (content) content.classList.add('show');
+    const content = document.querySelector('.page-content');
+    if (content) content.classList.add('show');
 });
 
-// Fade out content before other page
 document.querySelectorAll('.nav-links a').forEach(link => {
-  link.addEventListener('click', e => {
-    e.preventDefault();
-    const href = link.getAttribute('href');
-    const content = document.querySelector('.page-content');
-    if (content) content.style.opacity = 0; // fade out
-    setTimeout(() => {
-      window.location = href;
-    }, 400); 
-  });
+    link.addEventListener('click', e => {
+        e.preventDefault();
+        const href = link.getAttribute('href');
+        const content = document.querySelector('.page-content');
+        if (content) content.style.opacity = 0;
+        setTimeout(() => { window.location = href; }, 400);
+    });
 });
-document.addEventListener("DOMContentLoaded", function () {
+
+// --- Notes / Notecards ---
+document.addEventListener("DOMContentLoaded", () => {
     const notesContainer = document.getElementById("notesContainer");
     const addNoteBtn = document.getElementById("addNoteBtn");
     const addNoteModal = document.getElementById("addNoteModal");
@@ -78,10 +77,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     renderNotes();
     updateEmptyState();
-    if (!title || !content) {
-    alert("Please fill in all fields");
-    return;
-    }
 
     addNoteBtn.addEventListener("click", openAddNoteModal);
     closeModalBtn.addEventListener("click", closeAddNoteModal);
@@ -93,7 +88,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function renderNotes(notesToRender = notes) {
         notesContainer.innerHTML = "";
-
         notesToRender.forEach((note, index) => {
             const noteElement = document.createElement("div");
             noteElement.className = "note-card fade-in";
@@ -118,7 +112,7 @@ document.addEventListener("DOMContentLoaded", function () {
             notesContainer.appendChild(noteElement);
         });
 
-        document.querySelectorAll(".delete-btn").forEach((btn) => {
+        document.querySelectorAll(".delete-btn").forEach(btn => {
             btn.addEventListener("click", function () {
                 noteToDeleteId = parseInt(this.getAttribute("data-id"));
                 openConfirmModal();
@@ -127,84 +121,35 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function getTagClass(tag) {
-        const classes = {
-            work: "tag-work",
-            personal: "tag-personal",
-            ideas: "tag-ideas",
-            reminders: "tag-reminders",
-        };
+        const classes = { work: "tag-work", personal: "tag-personal", ideas: "tag-ideas", reminders: "tag-reminders" };
         return classes[tag] || "";
     }
-
     function getTagIcon(tag) {
-        const icons = {
-            work: '<i class="fas fa-briefcase"></i>',
-            personal: '<i class="fas fa-user"></i>',
-            ideas: '<i class="fas fa-lightbulb"></i>',
-            reminders: '<i class="fas fa-bell"></i>',
-        };
+        const icons = { work: '<i class="fas fa-briefcase"></i>', personal: '<i class="fas fa-user"></i>', ideas: '<i class="fas fa-lightbulb"></i>', reminders: '<i class="fas fa-bell"></i>' };
         return icons[tag] || "";
     }
-
     function getTagName(tag) {
-        const names = {
-            work: "Work",
-            personal: "Personal",
-            ideas: "Ideas",
-            reminders: "Reminders",
-        };
+        const names = { work: "Work", personal: "Personal", ideas: "Ideas", reminders: "Reminders" };
         return names[tag] || tag;
     }
-
     function formatDate(dateString) {
         const date = new Date(dateString);
-        return date.toLocaleDateString("en-US", {
-            day: "2-digit",
-            month: "2-digit",
-            year: "numeric",
-            hour: "2-digit",
-            minute: "2-digit",
-        });
+        return date.toLocaleDateString("en-US", { day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit" });
     }
 
-    function openAddNoteModal() {
-        addNoteModal.classList.add("active");
-        document.body.style.overflow = "hidden";
-    }
-
-    function closeAddNoteModal() {
-        addNoteModal.classList.remove("active");
-        document.body.style.overflow = "auto";
-        noteForm.reset();
-    }
-
-    function openConfirmModal() {
-        confirmModal.classList.add("active");
-        document.body.style.overflow = "hidden";
-    }
-
-    function closeConfirmModal() {
-        confirmModal.classList.remove("active");
-        document.body.style.overflow = "auto";
-        noteToDeleteId = null;
-    }
+    function openAddNoteModal() { addNoteModal.classList.add("active"); document.body.style.overflow = "hidden"; }
+    function closeAddNoteModal() { addNoteModal.classList.remove("active"); document.body.style.overflow = "auto"; noteForm.reset(); }
+    function openConfirmModal() { confirmModal.classList.add("active"); document.body.style.overflow = "hidden"; }
+    function closeConfirmModal() { confirmModal.classList.remove("active"); document.body.style.overflow = "auto"; noteToDeleteId = null; }
 
     function handleNoteSubmit(e) {
         e.preventDefault();
+        const title = document.getElementById("noteTitle").value.trim();
+        const content = document.getElementById("noteContent").value.trim();
+        if (!title || !content) { alert("Please fill in all fields"); return; }
+        const tag = document.querySelector('input[name="noteTag"]:checked').value;
 
-        const title = document.getElementById("noteTitle").value;
-        const content = document.getElementById("noteContent").value;
-        const tag = document.querySelector(
-            'input[name="noteTag"]:checked'
-        ).value;
-
-        const newNote = {
-            title,
-            content,
-            tag,
-            date: new Date().toISOString(),
-        };
-
+        const newNote = { title, content, tag, date: new Date().toISOString() };
         notes.unshift(newNote);
         saveNotes();
         renderNotes();
@@ -224,28 +169,21 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    function saveNotes() {
-        localStorage.setItem("notes", JSON.stringify(notes));
-    }
+    function saveNotes() { localStorage.setItem("notes", JSON.stringify(notes)); }
 
     function filterNotes() {
         const searchTerm = searchInput.value.toLowerCase();
         const filterValue = filterSelect.value;
-
         let filteredNotes = notes;
 
         if (searchTerm) {
             filteredNotes = filteredNotes.filter(
-                (note) =>
-                    note.title.toLowerCase().includes(searchTerm) ||
-                    note.content.toLowerCase().includes(searchTerm)
+                note => note.title.toLowerCase().includes(searchTerm) || note.content.toLowerCase().includes(searchTerm)
             );
         }
 
         if (filterValue !== "all") {
-            filteredNotes = filteredNotes.filter(
-                (note) => note.tag === filterValue
-            );
+            filteredNotes = filteredNotes.filter(note => note.tag === filterValue);
         }
 
         renderNotes(filteredNotes);
@@ -253,14 +191,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function updateEmptyState(notesToCheck = notes) {
-        if (notesToCheck.length === 0) {
-            emptyState.style.display = "block";
-        } else {
-            emptyState.style.display = "none";
-        }
+        emptyState.style.display = notesToCheck.length === 0 ? "block" : "none";
     }
 });
-/* Prompt generator*/
+
+// --- Prompt wheel ---
 const wheelBtn = document.getElementById("wheelBtn");
 const wheelModal = document.getElementById("wheelModal");
 const closeWheel = document.getElementById("closeWheel");
@@ -269,44 +204,39 @@ const spinBtn = document.getElementById("spinBtn");
 const promptText = document.getElementById("promptText");
 
 const prompts = [
-    
-  "What’s one thing you’re grateful for today?",
-  "Describe a small moment that surprised you recently and what you learnt or felt in that moment.",
-  "What’s been weighing on your mind this week?",
-  "How would you explain your defenition of love to somebody else?",
-  "What do you wish you could tell your younger self?",
-  "What’s a goal you want to work on this month?",
-  "Write about someone who inspires you and why.",
-  "What emotion have you felt the most lately and why do you think that is?",
-  "What helps you recharge when you’re tired and how often do you do it?",
-  "If today had a theme or color what would it be?"
+    "What’s one thing you’re grateful for today?",
+    "Describe a small moment that surprised you recently and what you learnt or felt in that moment.",
+    "What’s been weighing on your mind this week?",
+    "How would you explain your defenition of love to somebody else?",
+    "What do you wish you could tell your younger self?",
+    "What’s a goal you want to work on this month?",
+    "Write about someone who inspires you and why.",
+    "What emotion have you felt the most lately and why do you think that is?",
+    "What helps you recharge when you’re tired and how often do you do it?",
+    "If today had a theme or color what would it be?"
 ];
 
-let spinning = false; 
-    
-// open modal
-wheelBtn.addEventListener("click", () => {
-  wheelModal.style.display = "block";
-});
+let spinning = false;
 
-// close modal
+// open/close modal
+wheelBtn.addEventListener("click", () => { wheelModal.style.display = "block"; });
 closeWheel.addEventListener("click", () => {
-  wheelModal.style.display = "none";
-  wheel.style.transform = "rotate(0deg)";
-  promptText.textContent = "";
+    wheelModal.style.display = "none";
+    wheel.style.transform = "rotate(0deg)";
+    promptText.textContent = "";
 });
 
 // spin logic
 spinBtn.addEventListener("click", () => {
-  if (spinning) return;
-  spinning = true;
+    if (spinning) return;
+    spinning = true;
 
-  const deg = 720 + Math.floor(Math.random() * 360); // 2 full turns + random stop
-  wheel.style.transform = `rotate(${deg}deg)`;
+    const deg = 720 + Math.floor(Math.random() * 360);
+    wheel.style.transform = `rotate(${deg}deg)`;
 
-  setTimeout(() => {
-    const randomPrompt = prompts[Math.floor(Math.random() * prompts.length)];
-    promptText.textContent = `"${randomPrompt}"`;
-    spinning = false;
-  }, 4000); // match CSS transition time
+    setTimeout(() => {
+        const randomPrompt = prompts[Math.floor(Math.random() * prompts.length)];
+        promptText.textContent = `"${randomPrompt}"`;
+        spinning = false;
+    }, 4000);
 });

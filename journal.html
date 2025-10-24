@@ -51,13 +51,13 @@
         "loginNotice",
         45
       );
-    }); 
+    });  
     */
       // TODO: if logged in, push entries to Firebase instead of local list?
   </script>
   
   <script src="game.js"></script>
- 
+                                                              . 
 <!--Chatbase based chatbot(temporary perhaps?)-->
        <script>
 (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="YVXFrJ1IHHYdqx6R7jXDi";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
@@ -82,10 +82,10 @@
 
   <div class="wheel-overlay"></div>
   <div class="wheel-container">
-    <div class="wheel" id="wheel"></div>
+    <div class="wheel" id="wheel"></div>                
     <button id="spinBtn" class="spin-btn">SPIN</button>
     <p id="promptText" class="prompt-text"></p>
-    <button id="closeWheel" class="close-wheel">✖</button>
+    <button id="closeWheel" class="close-wheel">x</button>
   </div>
 </div>
 
